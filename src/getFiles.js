@@ -11,7 +11,7 @@ const getFiles = (folderPath, fileFilter = () => true) =>
   readdir(folderPath).then(names =>
     Promise.all(
       names
-        .map(name => path.resolve(folderPath, name))
+        .map(name => path.join(folderPath, name))
         .map(fullPath => stat(fullPath).then(stats => [fullPath, stats]))
     ).then(allStats =>
       allStats.reduce(
