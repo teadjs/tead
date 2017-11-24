@@ -1,0 +1,27 @@
+{
+  "name": "tead",
+  "version": "0.0.1",
+  "description": "Lighting the way to simpler testing",
+  "files": [
+    "src"
+  ],
+  "main": "./src/index.js",
+  "bin": {
+    "tead": "./src/index.js"
+  },
+  "scripts": {
+    "format": "npx prettier --write '{src,test}/**/*.js'",
+    "test": "node test/bootstrap && node src",
+    "test:watch": "npm t && fswatch -o . | xargs -n1 -I{} npm t"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okwolf/tead.git"
+  },
+  "author": "Wolfgang Wedemeyer <wolf@okwolf.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/okwolf/tead/issues"
+  },
+  "homepage": "https://github.com/okwolf/tead"
+}
