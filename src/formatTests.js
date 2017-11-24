@@ -24,44 +24,45 @@ const countFailingTests = testSuites =>
   );
 
 const formatTests = testSuites => {
-  // return testSuites;
   const failingSuites = testSuites.filter(({ tests = [] }) =>
     tests.some(({ failure }) => failure)
   );
 
   return [
-    ...testSuites.reduce((others, testSuite) => {
-      const { folder, file, tests = [] } = testSuite;
-      return [
-        ...others,
-        failingSuites.includes(testSuite)
-          ? [
-              "\x1b[30;41m%s\x1b[0m \x1b[1;2m%s\x1b[0;37;1m%s\x1b[0m",
-              " FAIL ",
-              folder,
-              file
-            ]
-          : [
-              "\x1b[30;42m%s\x1b[0m \x1b[1;2m%s\x1b[0;37;1m%s\x1b[0m",
-              " PASS ",
-              folder,
-              file
-            ],
-        ...tests.map(({ prefixes, name, failure }) => [
-          `\x1b[${colorForFailure(failure)}m%s%s%s\x1b[0m`,
-          "  ".repeat(prefixes.length + 1),
-          markForFailure(failure),
-          name
-        ]),
-        []
-      ];
-    }, []),
-    ["\x1b[32;1m%s %s\x1b[0m", countPassingTests(testSuites), "passing"],
-    ...(countFailingTests(testSuites)
-      ? [["\x1b[31;1m%s %s\x1b[0m", countFailingTests(testSuites), "failing"]]
-      : []),
-    [],
-    ...failingSuites.reduce(
+    [
+      ...testSuites.reduce((others, testSuite) => {
+        const { folder, file, tests = [] } = testSuite;
+        return [
+          ...others,
+          failingSuites.includes(testSuite)
+            ? [
+                "\x1b[30;41m%s\x1b[0m \x1b[1;2m%s\x1b[0;37;1m%s\x1b[0m",
+                " FAIL ",
+                folder,
+                file
+              ]
+            : [
+                "\x1b[30;42m%s\x1b[0m \x1b[1;2m%s\x1b[0;37;1m%s\x1b[0m",
+                " PASS ",
+                folder,
+                file
+              ],
+          ...tests.map(({ prefixes, name, failure }) => [
+            `\x1b[${colorForFailure(failure)}m%s%s%s\x1b[0m`,
+            "  ".repeat(prefixes.length + 1),
+            markForFailure(failure),
+            name
+          ]),
+          []
+        ];
+      }, []),
+      ["\x1b[32;1m%s %s\x1b[0m", countPassingTests(testSuites), "passing"],
+      ...(countFailingTests(testSuites)
+        ? [["\x1b[31;1m%s %s\x1b[0m", countFailingTests(testSuites), "failing"]]
+        : []),
+      []
+    ],
+    failingSuites.reduce(
       (others, { folder, file, tests = [] }) => [
         ...others,
         [

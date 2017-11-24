@@ -7,8 +7,10 @@ const formatTests = require("./formatTests");
 const compose = (...fns) =>
   fns.reduceRight((f, g) => (...args) => f(g(...args)));
 
-const printTests = tests => tests.forEach(test => console.log(...test));
-// const printTests = tests => console.log(JSON.stringify(tests, null, 2));
+const printTests = ([testSummary, failingTests]) => {
+  testSummary.concat(failingTests).forEach(line => console.log(...line));
+  process.exit(failingTests.length);
+};
 
 getFiles(process.cwd(), fileName => fileName.match(/.*(test|spec)\.js$/)).then(
   testFiles =>
