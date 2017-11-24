@@ -1,4 +1,6 @@
 const arrayIndex = index => `[${index}]`;
+const objectProperty = prop => `.${prop}`;
+const isObject = value => typeof value === "object";
 
 const diffArrays = (before, after, context = []) => [
   ...before
@@ -27,17 +29,21 @@ const diffObjects = (before, after, context = []) => {
       .reduce(
         (diffs, prop) =>
           diffs.concat(
-            diff(before[prop], after[prop], context.concat(`.${prop}`))
+            diff(
+              before[prop],
+              after[prop],
+              context.concat(objectProperty(prop))
+            )
           ),
         []
       ),
     ...beforeProps.slice(afterProps.length).map((prop, i) => ({
       removed: before[prop],
-      context: context.concat(`.${prop}`)
+      context: context.concat(objectProperty(prop))
     })),
     ...afterProps.slice(beforeProps.length).map((prop, i) => ({
       added: after[prop],
-      context: context.concat(`.${prop}`)
+      context: context.concat(objectProperty(prop))
     }))
   ];
 };
@@ -49,7 +55,7 @@ const diff = (before, after, context = []) => {
   if (Array.isArray(before) && Array.isArray(after)) {
     return diffArrays(before, after, context);
   }
-  if (typeof before === "object" && typeof after === "object") {
+  if (isObject(before) && isObject(after)) {
     return diffObjects(before, after, context);
   }
   return [{ before, after, context }];
