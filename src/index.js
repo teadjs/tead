@@ -13,23 +13,24 @@ const printTests = ([testSummary, failingTests]) => {
   process.exit(failingTests.length);
 };
 
-module.exports = () => 
-getFiles(
-  process.cwd(),
-  fileName =>
-    fileName.match(/.*(test|spec)\.js$/) && !fileName.match(/.*node_modules.*/)
-).then(testFiles =>
-  compose(formatTests, printTests)(
-    testFiles.map(fullPath => {
-      const file = path.basename(fullPath);
-      return {
-        file,
-        folder: fullPath.substring(
-          process.cwd().length + 1,
-          fullPath.length - file.length
-        ),
-        tests: compose(require, runTests, flattenTests)(fullPath)
-      };
-    })
-  )
-);
+module.exports = () =>
+  getFiles(
+    process.cwd(),
+    fileName =>
+      fileName.match(/.*(test|spec)\.js$/) &&
+      !fileName.match(/.*node_modules.*/)
+  ).then(testFiles =>
+    compose(formatTests, printTests)(
+      testFiles.map(fullPath => {
+        const file = path.basename(fullPath);
+        return {
+          file,
+          folder: fullPath.substring(
+            process.cwd().length + 1,
+            fullPath.length - file.length
+          ),
+          tests: compose(require, runTests, flattenTests)(fullPath)
+        };
+      })
+    )
+  );
