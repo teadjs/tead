@@ -32,18 +32,18 @@ const diffObjects = (before, after, context = []) => {
             diff(
               before[prop],
               after[prop],
-              context.concat(objectProperty(prop))
+              context.concat(context.length ? objectProperty(prop) : prop)
             )
           ),
         []
       ),
     ...beforeProps.slice(afterProps.length).map((prop, i) => ({
       removed: before[prop],
-      context: context.concat(objectProperty(prop))
+      context: context.concat(context.length ? objectProperty(prop) : prop)
     })),
     ...afterProps.slice(beforeProps.length).map((prop, i) => ({
       added: after[prop],
-      context: context.concat(objectProperty(prop))
+      context: context.concat(context.length ? objectProperty(prop) : prop)
     }))
   ];
 };

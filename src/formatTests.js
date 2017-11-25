@@ -1,7 +1,33 @@
+const json = value => JSON.stringify(value);
+
 const colorForFailure = failure =>
   failure === undefined ? 37 : failure === null ? 32 : 31;
+
 const markForFailure = failure =>
   failure === undefined ? "" : failure === null ? "✓ " : "✕ ";
+
+const formatFailureLine = line => {
+  const { context, before, after, removed, added } = line;
+  const prefix = context.length ? `for ${context.join("")}: ` : "";
+  if ("before" in line && "after" in line) {
+    return [
+      "    \x1b[90m%sexpected \x1b[1;32m%s\x1b[0;90m instead of \x1b[1;31m%s\x1b[0m",
+      prefix,
+      json(before),
+      json(after)
+    ];
+  } else if ("removed" in line) {
+    return ["    \x1b[90m%smissing \x1b[1;31m%s\x1b[0m", prefix, json(removed)];
+  } else if ("added" in line) {
+    return [
+      "    \x1b[90m%sextraneous \x1b[1;32m%s\x1b[0m",
+      prefix,
+      json(added)
+    ];
+  }
+  // Fallback ugly formatting for unknown failure reasons
+  return ["    \x1b[1;2m%s\x1b[0m", json(line)];
+};
 
 const countPassingTests = testSuites =>
   testSuites.reduce(
@@ -82,7 +108,8 @@ const formatTests = testSuites => {
                 prefixes.length ? `${prefixes.join(" > ")} > ` : "",
                 name
               ],
-              ["\n    \x1b[1;2m%s\x1b[0m", JSON.stringify(failure)]
+              [],
+              ...failure.map(formatFailureLine)
             ],
             []
           ),

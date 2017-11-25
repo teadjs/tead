@@ -267,94 +267,94 @@ module.exports = () =>
         {
           before: undefined,
           after: null,
-          context: [".a", ".b", ".c", ".d"]
+          context: ["a", ".b", ".c", ".d"]
         },
         {
           before: true,
           after: false,
-          context: [".a", ".b", ".c", ".e"]
+          context: ["a", ".b", ".c", ".e"]
         },
         {
           before: 1,
           after: 2,
-          context: [".a", ".b", ".c", ".f"]
+          context: ["a", ".b", ".c", ".f"]
         },
         {
           before: "foo",
           after: "bar",
-          context: [".a", ".b", ".c", ".g"]
+          context: ["a", ".b", ".c", ".g"]
         },
         {
           before: null,
           after: undefined,
-          context: [".a", ".b", ".c", ".h", "[0]"]
+          context: ["a", ".b", ".c", ".h", "[0]"]
         },
         {
           before: false,
           after: true,
-          context: [".a", ".b", ".c", ".h", "[1]"]
+          context: ["a", ".b", ".c", ".h", "[1]"]
         },
         {
           before: 3,
           after: 4,
-          context: [".a", ".b", ".c", ".h", "[2]"]
+          context: ["a", ".b", ".c", ".h", "[2]"]
         },
         {
           before: "fizz",
           after: "buzz",
-          context: [".a", ".b", ".c", ".h", "[3]"]
+          context: ["a", ".b", ".c", ".h", "[3]"]
         },
         {
           before: undefined,
           after: null,
-          context: [".a", ".b", ".c", ".h", "[4]", ".i"]
+          context: ["a", ".b", ".c", ".h", "[4]", ".i"]
         },
         {
           before: true,
           after: false,
-          context: [".a", ".b", ".c", ".h", "[4]", ".j"]
+          context: ["a", ".b", ".c", ".h", "[4]", ".j"]
         },
         {
           before: 5,
           after: 6,
-          context: [".a", ".b", ".c", ".h", "[4]", ".k"]
+          context: ["a", ".b", ".c", ".h", "[4]", ".k"]
         },
         {
           before: "baz",
           after: "fizzbuzz",
-          context: [".a", ".b", ".c", ".h", "[4]", ".l"]
+          context: ["a", ".b", ".c", ".h", "[4]", ".l"]
         },
         {
           removed: null,
-          context: [".a", ".b", ".c", ".m"]
+          context: ["a", ".b", ".c", ".m"]
         },
         {
           removed: false,
-          context: [".a", ".b", ".c", ".n"]
+          context: ["a", ".b", ".c", ".n"]
         },
         {
           removed: 7,
-          context: [".a", ".b", ".c", ".o"]
+          context: ["a", ".b", ".c", ".o"]
         },
         {
           removed: "foobar",
-          context: [".a", ".b", ".c", ".p"]
+          context: ["a", ".b", ".c", ".p"]
         },
         {
           added: undefined,
-          context: [".a", ".b", ".q"]
+          context: ["a", ".b", ".q"]
         },
         {
           added: true,
-          context: [".a", ".b", ".r"]
+          context: ["a", ".b", ".r"]
         },
         {
           added: 8,
-          context: [".a", ".b", ".s"]
+          context: ["a", ".b", ".s"]
         },
         {
           added: "string",
-          context: [".a", ".b", ".t"]
+          context: ["a", ".b", ".t"]
         }
       ]
     ]
