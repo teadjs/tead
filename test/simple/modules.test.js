@@ -1,4 +1,4 @@
-const canDestructure = ({ x = true } = {}) => x;
+const canDestructure = ({ x = true, y = true } = {}) => x && y;
 
 export default {
   can: {
