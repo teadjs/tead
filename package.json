@@ -1,6 +1,6 @@
 {
   "name": "tead",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Lighting the way to simpler testing",
   "files": ["src"],
   "main": "./src/index.js",
