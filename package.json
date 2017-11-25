@@ -10,7 +10,7 @@
     "tead": "./src/index.js"
   },
   "scripts": {
-    "format": "npx prettier --write '{src,test}/**/*.js'",
+    "format": "npx prettier --write \"{src,test}/**/*.js\"",
     "test": "node test/bootstrap && node src",
     "test:watch": "npm t && fswatch -o . | xargs -n1 -I{} npm t"
   },

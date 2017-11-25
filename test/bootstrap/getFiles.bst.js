@@ -3,7 +3,7 @@ const assert = require("assert");
 const getFiles = require("../../src/getFiles");
 
 const json = value => JSON.stringify(value);
-const expectFiles = ([folder, filter, expected]) => {
+const expectFiles = ([folder, filter, originalExpected]) => {
   const fullFolder = path.join(__dirname, folder);
   const timeoutID = setTimeout(() => {
     console.log("timed out waiting for getFiles Promise to resolve");
@@ -12,9 +12,13 @@ const expectFiles = ([folder, filter, expected]) => {
   return getFiles(fullFolder, filter)
     .then(files => {
       clearTimeout(timeoutID);
-      const actual = files.map(fullPath =>
+      const originalActual = files.map(fullPath =>
         fullPath.substring(fullFolder.length + 1)
       );
+      const expected = originalExpected
+        .map(expectedPath => expectedPath.replace("/", path.sep))
+        .sort();
+      const actual = originalActual.sort();
       try {
         assert.deepStrictEqual(actual, expected);
       } catch (e) {
