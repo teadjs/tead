@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+require = require("@std/esm")(module, { esm: "js", cjs: true });
 const path = require("path");
 const getFiles = require("./getFiles");
 const runTests = require("./runTests");

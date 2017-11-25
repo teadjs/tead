@@ -1,16 +1,17 @@
 {
   "name": "tead",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Lighting the way to simpler testing",
-  "files": [
-    "src"
-  ],
+  "files": ["src"],
   "main": "./src/index.js",
   "bin": {
     "tead": "./src/index.js"
   },
   "engines": {
     "node": ">=6.0"
+  },
+  "dependencies": {
+    "@std/esm": "^0.17.1"
   },
   "scripts": {
     "format": "npx prettier --write \"{src,test}/**/*.js\"",
