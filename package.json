@@ -16,12 +16,8 @@
   "scripts": {
     "format": "npx prettier --write \"{src,test}/**/*.js\"",
     "test": "node test",
-    "test:coverage": "npx nyc npm t",
+    "test:coverage": "npx nyc --temp-directory coverage -r lcov -r text npm t",
     "test:watch": "npm t && fswatch -o . | xargs -n1 -I{} npm t"
-  },
-  "nyc": {
-    "reporter": ["lcov", "text"],
-    "tempDirectory": "coverage"
   },
   "repository": {
     "type": "git",
