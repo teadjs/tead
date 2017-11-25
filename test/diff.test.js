@@ -1,6 +1,6 @@
-const diff = require("../src/diff");
+import diff from "../src/diff";
 
-module.exports = {
+export default {
   diff: {
     "is a function": ["function", typeof diff],
     "is empty without arguments": [diff(), []],
