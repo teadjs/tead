@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/okwolf/tead.svg?branch=master)](https://travis-ci.org/okwolf/tead) [![Coverage Status](https://coveralls.io/repos/github/okwolf/tead/badge.svg?branch=master)](https://coveralls.io/github/okwolf/tead?branch=master) [![npm version](https://img.shields.io/npm/v/tead.svg?style=flat)](https://www.npmjs.com/package/tead)

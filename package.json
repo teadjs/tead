@@ -1,11 +1,11 @@
 {
   "name": "tead",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Lighting the way to simpler testing",
   "files": ["src"],
   "main": "./src/index.js",
   "bin": {
-    "tead": "./src/index.js"
+    "tead": "./src/tead.js"
   },
   "engines": {
     "node": ">=6.0"
@@ -15,8 +15,13 @@
   },
   "scripts": {
     "format": "npx prettier --write \"{src,test}/**/*.js\"",
-    "test": "node test/bootstrap && node src",
+    "test": "node test",
+    "test:coverage": "npx nyc npm t",
     "test:watch": "npm t && fswatch -o . | xargs -n1 -I{} npm t"
+  },
+  "nyc": {
+    "reporter": ["lcov", "text"],
+    "tempDirectory": "coverage"
   },
   "repository": {
     "type": "git",

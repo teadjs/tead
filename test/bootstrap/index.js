@@ -1,2 +1,4 @@
-require("./diff.bst")();
-require("./getFiles.bst")();
+module.exports = () => {
+  require("./diff.bst")();
+  require("./getFiles.bst")();
+};

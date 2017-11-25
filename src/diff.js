@@ -2,7 +2,7 @@ const arrayIndex = index => `[${index}]`;
 const objectProperty = prop => `.${prop}`;
 const isObject = value => typeof value === "object";
 
-const diffArrays = (before, after, context = []) => [
+const diffArrays = (before, after, context) => [
   ...before
     .slice(0, Math.min(before.length, after.length))
     .reduce(
@@ -20,7 +20,7 @@ const diffArrays = (before, after, context = []) => [
   }))
 ];
 
-const diffObjects = (before, after, context = []) => {
+const diffObjects = (before, after, context) => {
   const beforeProps = Object.keys(before);
   const afterProps = Object.keys(after);
   return [

@@ -12,7 +12,10 @@ install:
   - npm i
 
 script:
-  - npm t
+  - npm run test:coverage
+
+after_script:
+  - cat coverage/lcov.info | npx coveralls
 
 notifications:
   email: false
