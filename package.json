@@ -9,6 +9,9 @@
   "bin": {
     "tead": "./src/index.js"
   },
+  "engines": {
+    "node": ">=6.0"
+  },
   "scripts": {
     "format": "npx prettier --write \"{src,test}/**/*.js\"",
     "test": "node test/bootstrap && node src",
