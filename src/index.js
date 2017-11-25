@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const path = require("path");
 const getFiles = require("./getFiles");
 const runTests = require("./runTests");
