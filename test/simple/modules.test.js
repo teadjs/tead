@@ -1,7 +1,9 @@
+const canDestructure = ({ x = true } = {}) => x;
+
 export default {
   can: {
     use: {
-      modules: [true, true]
+      modules: [canDestructure(), true]
     }
   }
 };

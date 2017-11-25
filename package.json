@@ -1,6 +1,6 @@
 {
   "name": "tead",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Lighting the way to simpler testing",
   "files": ["src"],
   "main": "./src/index.js",
@@ -11,7 +11,7 @@
     "node": ">=6.0"
   },
   "dependencies": {
-    "@std/esm": "^0.17.1"
+    "@std/esm": "^0.16.0"
   },
   "scripts": {
     "format": "npx prettier --write \"{src,test}/**/*.js\"",
