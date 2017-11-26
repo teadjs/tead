@@ -2,7 +2,9 @@
   "name": "tead",
   "version": "0.3.0",
   "description": "Lighting the way to simpler testing",
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "main": "./src/index.js",
   "bin": {
     "tead": "./src/tead.js"
