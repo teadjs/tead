@@ -31,38 +31,35 @@ const executeTests = ({ testFilter }) =>
     )
   );
 
-module.exports = (
-  {
+module.exports = options => {
+  const {
     testFilter = fileName =>
       fileName.match(/^((?!node_modules).)*(test|spec)\.js$/),
-    watchFilter = fileName => fileName.match(/^((?!node_modules).)*\.js$/),
-    ...options
-  } = {}
-) => {
-  executeTests({ ...options, testFilter }).then(
-    ([testSummary, failingTests, testCounts]) => {
-      if ("watch" in options) {
-        console.log("\x1Bc");
-        failingTests.concat(testCounts).forEach(line => console.log(...line));
-        fs.watch(process.cwd(), { recursive: true }, (_, fileName) => {
-          if (watchFilter(fileName)) {
-            executeTests({ ...options, testFilter }).then(
-              ([_, nextFailingTests, nextTestCounts]) => {
-                console.log("\x1Bc");
-                nextFailingTests
-                  .concat(nextTestCounts)
-                  .forEach(line => console.log(...line));
-              }
-            );
-          }
-        });
-      } else {
-        testSummary
-          .concat(failingTests, testCounts)
-          .forEach(line => console.log(...line));
-        console.log();
-        process.exit(failingTests.length);
-      }
+    watchFilter = fileName => fileName.match(/^((?!node_modules).)*\.js$/)
+  } = options;
+  Object.assign(options, { testFilter, watchFilter });
+  executeTests(options).then(([testSummary, failingTests, testCounts]) => {
+    if ("watch" in options) {
+      console.log("\x1Bc");
+      failingTests.concat(testCounts).forEach(line => console.log(...line));
+      fs.watch(process.cwd(), { recursive: true }, (_, fileName) => {
+        if (watchFilter(fileName)) {
+          executeTests(options).then(
+            ([_, nextFailingTests, nextTestCounts]) => {
+              console.log("\x1Bc");
+              nextFailingTests
+                .concat(nextTestCounts)
+                .forEach(line => console.log(...line));
+            }
+          );
+        }
+      });
+    } else {
+      testSummary
+        .concat(failingTests, testCounts)
+        .forEach(line => console.log(...line));
+      console.log();
+      process.exit(failingTests.length);
     }
-  );
+  });
 };
