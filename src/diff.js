@@ -1,6 +1,7 @@
 const arrayIndex = index => `[${index}]`;
 const objectProperty = prop => `.${prop}`;
-const isObject = value => typeof value === "object";
+const isObject = value =>
+  typeof value === "object" && value !== null && !Array.isArray(value);
 
 const diffArrays = (before, after, context) => [
   ...before
