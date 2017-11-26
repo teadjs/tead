@@ -35,14 +35,14 @@ module.exports = options => {
   Object.assign(options, { testFilter, watchFilter });
   executeTests(options).then(([testSummary, failingTests, testCounts]) => {
     if ("watch" in options) {
-      console.log("\x1Bc");
+      process.stdout.write('\u001b[2J\u001b[0;0H')
       failingTests.concat(testCounts).forEach(line => console.log(...line));
       fs.watch(process.cwd(), { recursive: true }, (_, fileName) => {
         if (watchFilter(fileName)) {
           Object.keys(require.cache).forEach(key => delete require.cache[key]);
           executeTests(options).then(
             ([_, nextFailingTests, nextTestCounts]) => {
-              console.log("\x1Bc");
+              process.stdout.write('\u001b[2J\u001b[0;0H')
               nextFailingTests
                 .concat(nextTestCounts)
                 .forEach(line => console.log(...line));
