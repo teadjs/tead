@@ -17,7 +17,7 @@
     "format": "npx prettier --write \"{src,test}/**/*.js\"",
     "test": "node test",
     "test:coverage": "npx nyc --temp-directory coverage -r lcov -r text --all npm t",
-    "test:watch": "node test --watch"
+    "test:watch": "npm t -- --watch"
   },
   "repository": {
     "type": "git",

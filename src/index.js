@@ -28,21 +28,24 @@ const executeTests = ({ testFilter }) =>
 
 module.exports = options => {
   const {
-    testFilter = fileName =>
-      fileName.match(/^((?!node_modules).)*(test|spec)\.js$/),
-    watchFilter = fileName => fileName.match(/^((?!node_modules).)*\.js$/)
+    testPattern = "^((?!node_modules).)*(test|spec).js$",
+    watchPattern = "^((?!node_modules).)*.js$"
   } = options;
+  const testFilter = filename => filename.match(new RegExp(testPattern));
+  const watchFilter = filename => filename.match(new RegExp(watchPattern));
   Object.assign(options, { testFilter, watchFilter });
   executeTests(options).then(([testSummary, failingTests, testCounts]) => {
     if ("watch" in options) {
-      process.stdout.write('\u001b[2J\u001b[0;0H')
+      process.stdout.write("\u001b[2J\u001b[0;0H");
       failingTests.concat(testCounts).forEach(line => console.log(...line));
       fs.watch(process.cwd(), { recursive: true }, (_, fileName) => {
         if (watchFilter(fileName)) {
+          const timeoutID = setInterval(() => process.stdout.write("."), 100);
           Object.keys(require.cache).forEach(key => delete require.cache[key]);
           executeTests(options).then(
             ([_, nextFailingTests, nextTestCounts]) => {
-              process.stdout.write('\u001b[2J\u001b[0;0H')
+              clearTimeout(timeoutID);
+              process.stdout.write("\u001b[2J\u001b[0;0H");
               nextFailingTests
                 .concat(nextTestCounts)
                 .forEach(line => console.log(...line));

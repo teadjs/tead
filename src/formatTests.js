@@ -11,10 +11,10 @@ const formatFailureLine = line => {
   const prefix = context.length ? `for ${context.join("")}: ` : "";
   if ("before" in line && "after" in line) {
     return [
-      "    \x1b[90m%sexpected \x1b[1;32m%s\x1b[0;90m instead of \x1b[1;31m%s\x1b[0m",
+      "    \x1b[90m%sencountered \x1b[1;31m%s\x1b[0;90m but expected \x1b[1;32m%s\x1b[0m",
       prefix,
-      json(before),
-      json(after)
+      json(after),
+      json(before)
     ];
   } else if ("removed" in line) {
     return ["    \x1b[90m%smissing \x1b[1;31m%s\x1b[0m", prefix, json(removed)];
