@@ -2,7 +2,7 @@ import flattenTests from "../src/flattenTests";
 
 export default {
   flattenTests: {
-    "is a function": ["function", typeof flattenTests],
+    "is a function": [typeof flattenTests, "function"],
     "is empty without arguments": [flattenTests(), []],
     flattens: {
       "empty test object to empty list": [flattenTests({}), []],

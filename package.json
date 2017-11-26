@@ -1,6 +1,6 @@
 {
   "name": "tead",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Lighting the way to simpler testing",
   "files": ["src"],
   "main": "./src/index.js",
@@ -17,7 +17,7 @@
     "format": "npx prettier --write \"{src,test}/**/*.js\"",
     "test": "node test",
     "test:coverage": "npx nyc --temp-directory coverage -r lcov -r text --all npm t",
-    "test:watch": "npm t && fswatch -o . | xargs -n1 -I{} npm t"
+    "test:watch": "npm t -- --watch"
   },
   "repository": {
     "type": "git",

@@ -2,7 +2,7 @@ import diff from "../src/diff";
 
 export default {
   diff: {
-    "is a function": ["function", typeof diff],
+    "is a function": [typeof diff, "function"],
     "is empty without arguments": [diff(), []],
     with: {
       undefined: {
