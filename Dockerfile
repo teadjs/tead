@@ -5,4 +5,4 @@ RUN npm install && npm cache clean --force
 COPY src /usr/src/app/src
 COPY test /usr/src/app/test
 RUN npm i -g npx
-CMD [ "npm", "run", "test:coverage" ]
+CMD [ "npm", "test" ]

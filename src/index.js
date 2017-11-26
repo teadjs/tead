@@ -1,4 +1,3 @@
-require = require("@std/esm")(module, { esm: "js", cjs: true });
 const path = require("path");
 const fs = require("fs");
 const getFiles = require("./getFiles");

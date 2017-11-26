@@ -11,9 +11,6 @@ node_js:
 before_install:
   - npm i -g npx
 
-script:
-  - npm run test:coverage
-
 after_script:
   - cat coverage/lcov.info | npx coveralls
 

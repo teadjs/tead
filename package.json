@@ -15,11 +15,14 @@
   "dependencies": {
     "@std/esm": "^0.16.0"
   },
+  "@std/esm": {
+    "esm": "js",
+    "cjs": true
+  },
   "scripts": {
     "format": "npx prettier --write \"{src,test}/**/*.js\"",
-    "test": "node test",
-    "test:coverage": "npx nyc --temp-directory coverage -r lcov -r text --all npm t",
-    "test:watch": "npm t -- --watch"
+    "test": "npx nyc --require @std/esm --temp-directory coverage -r lcov -r text node test",
+    "test:watch": "node -r @std/esm test --watch"
   },
   "repository": {
     "type": "git",

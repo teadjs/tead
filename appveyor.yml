@@ -6,12 +6,11 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - npm i -g npx
-  - npm i
-
-test_script:
   - node --version
   - npm --version
-  - npm run test:coverage
+  - npm i -g npx
+
+test_script:
+  - npm i
 
 build: off
