@@ -20,9 +20,12 @@
     "cjs": true
   },
   "scripts": {
+    "clean": "npx rimraf coverage node_modules",
     "format": "npx prettier --write \"{src,test}/**/*.js\"",
+    "format:check": "npx prettier --list-different \"{src,test}/**/*.js\"",
     "test": "npx nyc --require @std/esm --temp-directory coverage -r lcov -r text node test",
-    "test:watch": "node -r @std/esm test --watch"
+    "test:watch": "node -r @std/esm test --watch",
+    "prepare": "npm run format:check && npm t"
   },
   "repository": {
     "type": "git",
