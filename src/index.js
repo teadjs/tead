@@ -9,11 +9,6 @@ const formatTests = require("./formatTests");
 const compose = (...fns) =>
   fns.reduceRight((f, g) => (...args) => f(g(...args)));
 
-const requireUncached = moduleName => {
-  delete require.cache[require.resolve(moduleName)];
-  return require(moduleName);
-};
-
 const executeTests = ({ testFilter }) =>
   getFiles(process.cwd(), testFilter).then(testFiles =>
     formatTests(
@@ -25,7 +20,7 @@ const executeTests = ({ testFilter }) =>
             process.cwd().length + 1,
             fullPath.length - file.length
           ),
-          tests: compose(requireUncached, runTests, flattenTests)(fullPath)
+          tests: compose(require, runTests, flattenTests)(fullPath)
         };
       })
     )
@@ -44,6 +39,7 @@ module.exports = options => {
       failingTests.concat(testCounts).forEach(line => console.log(...line));
       fs.watch(process.cwd(), { recursive: true }, (_, fileName) => {
         if (watchFilter(fileName)) {
+          Object.keys(require.cache).forEach(key => delete require.cache[key]);
           executeTests(options).then(
             ([_, nextFailingTests, nextTestCounts]) => {
               console.log("\x1Bc");
