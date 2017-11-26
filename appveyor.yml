@@ -9,8 +9,9 @@ install:
   - node --version
   - npm --version
   - npm i -g npx
+  - npm i
 
 test_script:
-  - npm i
+  - npm t
 
 build: off
