@@ -5,6 +5,7 @@ const getFiles = require("./getFiles");
 const runTests = require("./runTests");
 const flattenTests = require("./flattenTests");
 const formatTests = require("./formatTests");
+const readline = require("readline");
 
 const compose = (...fns) =>
   fns.reduceRight((f, g) => (...args) => f(g(...args)));
@@ -38,19 +39,29 @@ module.exports = options => {
     if ("watch" in options) {
       process.stdout.write("\u001b[2J\u001b[0;0H");
       failingTests.concat(testCounts).forEach(line => console.log(...line));
+      const rerunTests = () => {
+        const timeoutID = setInterval(() => process.stdout.write("."), 100);
+        Object.keys(require.cache).forEach(key => delete require.cache[key]);
+        executeTests(options).then(([_, nextFailingTests, nextTestCounts]) => {
+          clearTimeout(timeoutID);
+          process.stdout.write("\u001b[2J\u001b[0;0H");
+          nextFailingTests
+            .concat(nextTestCounts)
+            .forEach(line => console.log(...line));
+        });
+      };
+      readline.emitKeypressEvents(process.stdin);
+      process.stdin.setRawMode(true);
+      process.stdin.on("keypress", (str, key) => {
+        if ((key.ctrl && key.name === "c") || key.name === "q") {
+          process.exit(0);
+        } else if (key.name === "a" || key.name === "return") {
+          rerunTests();
+        }
+      });
       fs.watch(process.cwd(), { recursive: true }, (_, fileName) => {
         if (watchFilter(fileName)) {
-          const timeoutID = setInterval(() => process.stdout.write("."), 100);
-          Object.keys(require.cache).forEach(key => delete require.cache[key]);
-          executeTests(options).then(
-            ([_, nextFailingTests, nextTestCounts]) => {
-              clearTimeout(timeoutID);
-              process.stdout.write("\u001b[2J\u001b[0;0H");
-              nextFailingTests
-                .concat(nextTestCounts)
-                .forEach(line => console.log(...line));
-            }
-          );
+          rerunTests();
         }
       });
     } else {
