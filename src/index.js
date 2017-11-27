@@ -33,8 +33,8 @@ const executeTests = ({ testFilter }) =>
 
 module.exports = options => {
   const {
-    testPattern = "^((?!node_modules).)*(test|spec).js$",
-    watchPattern = "^((?!node_modules).)*.js$"
+    testPattern = "^((?!node_modules).)*(test|spec)\\.js$",
+    watchPattern = "^((?!node_modules).)*\\.js$"
   } = options;
   const testFilter = filename => filename.match(new RegExp(testPattern));
   const watchFilter = filename => filename.match(new RegExp(watchPattern));
