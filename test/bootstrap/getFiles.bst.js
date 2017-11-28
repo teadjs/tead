@@ -44,6 +44,10 @@ const expectFiles = ([folder, filter, originalExpected]) => {
     });
 };
 
+const missingFiles = getFiles("missing")
+  .then(files => ["expected no files to be found, but instead found:", files])
+  .catch(e => (e.code === "ENOENT" ? [] : [e]));
+
 const tests = [
   [
     path.join("folder", "subfolder"),
@@ -104,7 +108,7 @@ const tests = [
 ];
 
 module.exports = () =>
-  Promise.all(tests.map(expectFiles)).then(results => {
+  Promise.all(tests.map(expectFiles).concat(missingFiles)).then(results => {
     const failures = results.filter(result => result.length);
     if (failures.length) {
       failures.forEach(failure => console.log(...failure));
