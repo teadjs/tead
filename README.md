@@ -105,11 +105,11 @@ npm test
 
 Here are the available command line arguments:
 
-| Argument     | Usage | Default |
-|--------------|-------|---------|
-| testPattern  | The regex pattern Tead uses to detect test files. Defaults to files ending with `test.js` or `spec.js` not in `node_modules`. | `^((?!node_modules).)*(test|spec)\.js$` |
-| watch        | Watch files for changes and rerun tests. Output is limited to only failing tests and overall passing/failing counts. |  |
-| watchPattern | The regex pattern Tead uses when in watch mode to match which file changes should rereun tests. Defaults to files ending with `.js` not in `node_modules`. | `^((?!node_modules).)*\.js$` |
+| Argument     | Usage                                                                                                                                                      | Default                                                 |
+|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
+| testPattern  | The regex pattern Tead uses to detect test files. Defaults to files ending with `test.js` or `spec.js` not in `node_modules`.                              | <code>^((?!node_modules).)*(test&#124;spec)\.js$</code> |
+| watch        | Watch files for changes and rerun tests. Output is limited to only failing tests and overall passing/failing counts.                                       |                                                         |
+| watchPattern | The regex pattern Tead uses when in watch mode to match which file changes should rereun tests. Defaults to files ending with `.js` not in `node_modules`. | <code>^((?!node_modules).)*\.js$</code>                 |
 
 Each argument is passed in the form `--argument=value`. Here is an example using all available arguments:
 
