@@ -2,7 +2,18 @@ const assert = require("assert");
 const options = require("../../src/options");
 
 module.exports = () =>
-  [[[], {}], [["invalid"], {}], [["--foo=bar"], { foo: "bar" }]]
+  [
+    [[], {}],
+    [["invalid"], {}],
+    [["--foo=bar"], { foo: "bar" }],
+    [
+      ["--testPattern=.*test\\.js$", "ignored", "--watch"],
+      {
+        testPattern: ".*test\\.js$",
+        watch: true
+      }
+    ]
+  ]
     .map(([argv, expected]) => {
       const originalArgv = process.argv;
       process.argv = argv;

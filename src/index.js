@@ -41,7 +41,7 @@ module.exports = options => {
   Object.assign(options, { testFilter, watchFilter });
   executeTests(options).then(
     ([testSummary = [], failingTests = [], testCounts = []]) => {
-      if ("watch" in options) {
+      if (options.watch) {
         process.stdout.write("\u001b[2J\u001b[0;0H");
         failingTests.concat(testCounts).forEach(line => console.log(...line));
         const rerunTests = () => {
