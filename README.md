@@ -2,9 +2,9 @@
 
 [![Travis Build Status](https://travis-ci.org/okwolf/tead.svg?branch=master)](https://travis-ci.org/okwolf/tead) [![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/okwolf/tead?svg=true)](https://ci.appveyor.com/project/okwolf/tead/branch/master) [![Coverage Status](https://coveralls.io/repos/github/okwolf/tead/badge.svg?branch=master)](https://coveralls.io/github/okwolf/tead?branch=master) [![npm version](https://img.shields.io/npm/v/tead.svg?style=flat)](https://www.npmjs.com/package/tead)
 
-In a world full of complex test-runners, Tead dares to keep it simple. Tests are defined as plain JavaScript objects. The only test assertion supported is a simple form of deep equals. Mocks/fakes/spies will never be provided. Asynchronous tests are not possible. These are all very intentional key features.
+In a world full of complex test-runners, Tead dares to keep it simple. Tests are defined as plain JavaScript objects. The only test assertion supported is a basic form of deep equals. Mocks/fakes/spies will never be provided. Asynchronous tests are not possible. These are all very intentional key features.
 
-The boilerplate and global nastiness of functions such as `describe/beforeEach/beforeAll/afterEach/afterAll/test/it/assert/expect/...` are gone. Your linter is so happy, it no longer cares whether you use semicolons or not. Callback functions with `done` arguments that you're responsible for calling - history. Once you learn the simple convention for test values, you will notice they are all signal and no noise. The standard-issue watch mode is built-in. Support for your ES6 modules comes attached to its frontal lobe.
+The boilerplate and global nastiness of functions such as `describe/beforeEach/beforeAll/afterEach/afterAll/test/it/assert/expect/...` are gone. Your linter is so happy, it no longer cares whether you use semicolons or not. Callback functions with `done` arguments that you're responsible for calling - history. Once you learn the simple convention for test values, you will notice they are all signal and no noise. Standard-issue watch mode is built-in. Support for your ES6 modules comes attached to its frontal lobe.
 
 Tead is compatible with `Node.js >=6`.
 
@@ -20,7 +20,7 @@ Let's get started by writing a test for a hypothetical function that adds two nu
 export default (a, b) => a + b;
 ```
 
-Then create a file named `sum.test.js`. This will contain our actual tests:
+Then create a file named `sum.test.js` and add some tests:
 
 ```js
 import sum from "./sum";
@@ -35,7 +35,7 @@ export default {
 };
 ```
 
-Object keys are used to group and describe tests and array values describe test expectations. The order of the elements in the expectation is `[actual, expected]` and differences will be reported as test failures.
+Object keys are used to group and describe tests. Array values represent test expectations. The order of the elements in the expectation is `[actual, expected]` and differences will be reported as test failures.
 
 Finally, run `npx tead` and Tead will print this message:
 
@@ -55,7 +55,7 @@ $ npx tead
 
 I believed in you all along ✋
 
-## Installation
+## Installation Options
 
 ### Global
 
@@ -119,7 +119,7 @@ npx tead --testPattern=folder.*\.test\.js --watch --watchPattern=folder.*\.test\
 
 ### API
 
-A programmatic way to integrate running Tead with any existing JavaScript code.
+Tead offers a programmatic way to integrate running with existing JavaScript code.
 
 You may bring in the `tead` API function using `import` if you have support for ES6 syntax:
 
