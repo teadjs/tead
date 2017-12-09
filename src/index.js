@@ -41,7 +41,7 @@ module.exports = options => {
   } = options;
   if (coverage) {
     spawn(
-      `npx nyc --require @std/esm --temp-directory coverage -r lcov -r text node ${__dirname}/tead.js --noesm`,
+      `npx nyc --require @std/esm --temp-directory coverage -r lcov -r text node ${__dirname}/tead.js --noesm "--testPattern=${testPattern}"`,
       {
         shell: true,
         stdio: "inherit"
