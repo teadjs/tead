@@ -15,10 +15,7 @@
   "dependencies": {
     "@std/esm": "^0.18.0"
   },
-  "@std/esm": {
-    "esm": "js",
-    "cjs": true
-  },
+  "@std/esm": "cjs",
   "scripts": {
     "clean": "npx rimraf coverage node_modules",
     "format": "npx prettier --write {src,test}/**/*.js",
