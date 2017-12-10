@@ -69,7 +69,7 @@ Then you may run tests in any project folder with:
 tead
 ```
 
-### npx
+### `npx`
 
 No install required, just run from any project folder:
 
