@@ -7,7 +7,7 @@ const markForFailure = failure =>
   failure === undefined ? "" : failure === null ? "✓ " : "✕ ";
 
 const formatFailureLine = line => {
-  const { context, before, after, removed, added } = line;
+  const { context = [], before, after, removed, added, invalid } = line;
   const prefix = context.length ? `for ${context.join("")}: ` : "";
   if ("before" in line && "after" in line) {
     return [
@@ -23,6 +23,12 @@ const formatFailureLine = line => {
       "    \x1b[90m%sextraneous \x1b[1;32m%s\x1b[0m",
       prefix,
       json(added)
+    ];
+  } else if ("invalid" in line) {
+    return [
+      "    \x1b[90m%sencountered \x1b[1;31m%s\x1b[0;90m but expected \x1b[1;32man object or test expectation array\x1b[0m",
+      prefix,
+      json(invalid)
     ];
   }
   // Fallback ugly formatting for unknown failure reasons
