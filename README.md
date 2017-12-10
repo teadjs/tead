@@ -6,7 +6,7 @@ In a world full of complex test-runners, Tead dares to keep it simple. Tests are
 
 The boilerplate and global nastiness of functions such as `describe/beforeEach/beforeAll/afterEach/afterAll/test/it/assert/expect/...` are gone. Your linter is so happy, it no longer cares whether you use semicolons or not. Callback functions with `done` arguments that you're responsible for calling - history. Once you learn the simple convention for test values, you will notice they are all signal and no noise. Standard-issue watch mode is built-in. Support for your ES6 modules comes attached to its frontal lobe.
 
-Tead is compatible with `Node.js >=6`.
+Tead is compatible with `Node.js >= 6`.
 
 If you are interested in using a functional style of building applications from pure functions free of side effects, Tead will aid you in your noble quest. There is only one possible kind of function that can be written in this utopian world, and but a single way to test it. Each test merely calls one of these pure functions with an input value and compares the actual result with the expected output for equality. Writing tests changes from being a chore to a joy, and suddenly tests are written first instead of as an afterthought. Such coverage. So much rejoicing.
 
@@ -37,7 +37,7 @@ export default {
 
 Object keys are used to group and describe tests. Array values represent test expectations. The order of the elements in the expectation is `[actual, expected]` and differences will be reported as test failures.
 
-Finally, run `npx tead` and Tead will print this message:
+Finally, run `npx tead` (see the [note below](#npx) if using an older version of Node.js) and Tead will print this message:
 
 ```console
 $ npx tead
@@ -69,12 +69,24 @@ Then you may run tests in any project folder with:
 tead
 ```
 
-### NPX
+### npx
 
 No install required, just run from any project folder:
 
 ```console
 npx tead
+```
+
+Keep in mind that in order to use `npx` with `Node.js < 8` you need to either install `npx` globally:
+
+```console
+npm i -g npx
+```
+
+or update your version of `npm`:
+
+```console
+npm i -g npm
 ```
 
 ### Local
@@ -105,16 +117,28 @@ npm test
 
 Here are the available command line arguments:
 
-| Argument     | Usage                                                                                                                                                      | Default                                                 |
-|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
-| testPattern  | The regex pattern Tead uses to detect test files. Defaults to files ending with `test.js` or `spec.js` not in `node_modules`.                              | <code>^((?!node_modules).)*(test&#124;spec)\.js$</code> |
-| watch        | Watch files for changes and rerun tests. Output is limited to only failing tests and overall passing/failing counts.                                       |                                                         |
-| watchPattern | The regex pattern Tead uses when in watch mode to match which file changes should rereun tests. Defaults to files ending with `.js` not in `node_modules`. | <code>^((?!node_modules).)*\.js$</code>                 |
+| Argument     | Usage                                                                                                                                                         | Default                                                 |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
+| testPattern  | The regex pattern Tead uses to detect test files. Defaults to files ending with `test.js` or `spec.js` not in `node_modules`.                                 | <code>^((?!node_modules).)*(test&#124;spec)\.js$</code> |
+| watch        | Watch files for changes and rerun tests. Output is limited to only failing tests and overall passing/failing counts.                                          |                                                         |
+| watchPattern | The regex pattern Tead uses when in watch mode to match which file changes should rereun tests. Defaults to files ending with `.js` not in `node_modules`.    | <code>^((?!node_modules).)*\.js$</code>                 |
+| coverage     | Test coverage information is collected, reported in the output, and written to the `/coverage` folder.                                                        |                                                         |
+| noesm        | Bypass [`@std/esm`](https://github.com/standard-things/esm#stdesm), either because you aren't using ES6 modules or have already brought in your own solution. |                                                         |
 
-Each argument is passed in the form `--argument=value`. Here is an example using all available arguments:
+Each argument is passed in the form `--argument=value`. Here is an example:
 
 ```console
 npx tead --testPattern=folder.*\.test\.js --watch --watchPattern=folder.*\.test\.js
+```
+
+### Coverage
+
+The `--coverage` argument makes use of `npx`, so the same [caveat](#npx) about Node.js versions above applies.
+
+There is one additional step you will want to complete if you are using ES6 modules. In order to unlock using `import`/`export` statements from files other than [`.mjs`](https://github.com/nodejs/node-eps/blob/master/002-es-modules.md#32-determining-if-source-is-an-es-module) and/or to mix ES6 modules and CommonJS you will want to add the following to your `package.json` file:
+
+```json
+"@std/esm": "cjs",
 ```
 
 ### API

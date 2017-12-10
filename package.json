@@ -13,18 +13,16 @@
     "node": ">=6.0"
   },
   "dependencies": {
-    "@std/esm": "^0.16.0"
+    "@std/esm": "^0.18.0"
   },
-  "@std/esm": {
-    "esm": "js",
-    "cjs": true
-  },
+  "@std/esm": "cjs",
   "scripts": {
     "clean": "npx rimraf coverage node_modules",
-    "format": "npx prettier --write \"{src,test}/**/*.js\"",
-    "format:check": "npx prettier --list-different \"{src,test}/**/*.js\"",
-    "test": "npx nyc --require @std/esm --temp-directory coverage -r lcov -r text node test",
-    "test:watch": "node -r @std/esm test --watch",
+    "format": "npx prettier --write {src,test}/**/*.js",
+    "format:check": "npx prettier --list-different {src,test}/**/*.js",
+    "pretest": "node test/bootstrap",
+    "test": "node -r @std/esm src/tead.js --coverage",
+    "test:watch": "node -r @std/esm src/tead.js --watch",
     "prepare": "npm run format:check && npm t"
   },
   "repository": {

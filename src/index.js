@@ -5,6 +5,7 @@ const runTests = require("./runTests");
 const flattenTests = require("./flattenTests");
 const formatTests = require("./formatTests");
 const readline = require("readline");
+const { spawn } = require("child_process");
 
 const compose = (...fns) =>
   fns.reduceRight((f, g) => (...args) => f(g(...args)));
@@ -34,14 +35,26 @@ const executeTests = ({ testFilter }) =>
 module.exports = options => {
   const {
     testPattern = "^((?!node_modules).)*(test|spec)\\.js$",
-    watchPattern = "^((?!node_modules).)*\\.js$"
+    watchPattern = "^((?!node_modules).)*\\.js$",
+    watch,
+    coverage
   } = options;
+  if (coverage) {
+    spawn(
+      `npx nyc --require @std/esm --temp-directory coverage -r lcov -r text node ${__dirname}/tead.js --noesm "--testPattern=${testPattern}"`,
+      {
+        shell: true,
+        stdio: "inherit"
+      }
+    );
+    return;
+  }
   const testFilter = filename => filename.match(new RegExp(testPattern));
   const watchFilter = filename => filename.match(new RegExp(watchPattern));
   Object.assign(options, { testFilter, watchFilter });
   executeTests(options).then(
     ([testSummary = [], failingTests = [], testCounts = []]) => {
-      if (options.watch) {
+      if (watch) {
         process.stdout.write("\u001b[2J\u001b[0;0H");
         failingTests.concat(testCounts).forEach(line => console.log(...line));
         const rerunTests = () => {
