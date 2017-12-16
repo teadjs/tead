@@ -117,28 +117,18 @@ npm test
 
 Here are the available command line arguments:
 
-| Argument     | Usage                                                                                                                                                         | Default                                                 |
-|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
-| testPattern  | The regex pattern Tead uses to detect test files. Defaults to files ending with `test.js` or `spec.js` not in `node_modules`.                                 | <code>^((?!node_modules).)*(test&#124;spec)\.js$</code> |
-| watch        | Watch files for changes and rerun tests. Output is limited to only failing tests and overall passing/failing counts.                                          |                                                         |
-| watchPattern | The regex pattern Tead uses when in watch mode to match which file changes should rereun tests. Defaults to files ending with `.js` not in `node_modules`.    | <code>^((?!node_modules).)*\.js$</code>                 |
-| coverage     | Test coverage information is collected, reported in the output, and written to the `/coverage` folder.                                                        |                                                         |
-| noesm        | Bypass [`@std/esm`](https://github.com/standard-things/esm#stdesm), either because you aren't using ES6 modules or have already brought in your own solution. |                                                         |
+| Argument     | Usage                                                                                                                                                                                                     | Default                                                 |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
+| testPattern  | The regex pattern Tead uses to detect test files. Defaults to files ending with `test.js` or `spec.js` not in `node_modules`.                                                                             | <code>^((?!node_modules).)*(test&#124;spec)\.js$</code> |
+| watch        | Watch files for changes and rerun tests. Output is limited to only failing tests and overall passing/failing counts.                                                                                      |                                                         |
+| watchPattern | The regex pattern Tead uses when in watch mode to match which file changes should rereun tests. Defaults to files ending with `.js` not in `node_modules`.                                                | <code>^((?!node_modules).)*\.js$</code>                 |
+| coverage     | Test coverage information is collected, reported in the output, and written to the `/coverage` folder. This argument makes use of `npx`, so the same [caveat](#npx) about Node.js versions above applies. |                                                         |
+| noesm        | Bypass [`@std/esm`](https://github.com/standard-things/esm#stdesm), either because you aren't using ES6 modules or have already brought in your own solution.                                             |                                                         |
 
 Each argument is passed in the form `--argument=value`. Here is an example:
 
 ```console
 npx tead --testPattern=folder.*\.test\.js --watch --watchPattern=folder.*\.test\.js
-```
-
-### Coverage
-
-The `--coverage` argument makes use of `npx`, so the same [caveat](#npx) about Node.js versions above applies.
-
-There is one additional step you will want to complete if you are using ES6 modules. In order to unlock using `import`/`export` statements from files other than [`.mjs`](https://github.com/nodejs/node-eps/blob/master/002-es-modules.md#32-determining-if-source-is-an-es-module) and/or to mix ES6 modules and CommonJS you will want to add the following to your `package.json` file:
-
-```json
-"@std/esm": "cjs",
 ```
 
 ### API
