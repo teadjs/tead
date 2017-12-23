@@ -56,6 +56,10 @@ export default {
           diff([[true]], [[false]]),
           [{ before: true, after: false, context: ["[0]", "[0]"] }]
         ],
+        "contains modified diff when comparing nested empty array to empty empty object": [
+          diff([[]], [{}]),
+          [{ before: [], after: {}, context: ["[0]"] }]
+        ],
         "contains added diff when comparing nested empty array to single element array": [
           diff([[]], [[true]]),
           [{ added: true, context: ["[0]", "[0]"] }]
@@ -74,6 +78,10 @@ export default {
         "contains modified diff for nested single property not equal objects": [
           diff([{ a: 1 }], [{ a: 2 }]),
           [{ before: 1, after: 2, context: ["[0]", ".a"] }]
+        ],
+        "contains modified diff when comparing nested empty object to empty array": [
+          diff([{}], [[]]),
+          [{ before: {}, after: [], context: ["[0]"] }]
         ],
         "contains added diff when comparing nested empty object to single property object": [
           diff([{}], [{ a: 1 }]),

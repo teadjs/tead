@@ -121,7 +121,8 @@ module.exports = () =>
           { a: { b: { c: 4, d: [null, false, 6, "fizz"] } } }
         ],
         [],
-        [undefined, false, 8, "fizzbuzz"]
+        [undefined, false, 8, "fizzbuzz"],
+        []
       ],
       [
         [
@@ -132,7 +133,8 @@ module.exports = () =>
           { a: { b: { c: 5, d: [undefined, true, 7, "buzz"] } } }
         ],
         [null, true, 3, "baz"],
-        []
+        [],
+        {}
       ],
       [
         {
@@ -211,7 +213,8 @@ module.exports = () =>
         {
           removed: "fizzbuzz",
           context: ["[2]", "[3]"]
-        }
+        },
+        { before: [], after: {}, context: ["[3]"] }
       ]
     ],
 
@@ -236,7 +239,8 @@ module.exports = () =>
               n: false,
               o: 7,
               p: "foobar"
-            }
+            },
+            q: {}
           }
         }
       },
@@ -256,10 +260,11 @@ module.exports = () =>
                 { i: null, j: false, k: 6, l: "fizzbuzz" }
               ]
             },
-            q: undefined,
-            r: true,
-            s: 8,
-            t: "string"
+            q: [],
+            r: undefined,
+            s: true,
+            t: 8,
+            u: "string"
           }
         }
       },
@@ -340,21 +345,22 @@ module.exports = () =>
           removed: "foobar",
           context: ["a", ".b", ".c", ".p"]
         },
+        { before: {}, after: [], context: ["a", ".b", ".q"] },
         {
           added: undefined,
-          context: ["a", ".b", ".q"]
-        },
-        {
-          added: true,
           context: ["a", ".b", ".r"]
         },
         {
-          added: 8,
+          added: true,
           context: ["a", ".b", ".s"]
         },
         {
-          added: "string",
+          added: 8,
           context: ["a", ".b", ".t"]
+        },
+        {
+          added: "string",
+          context: ["a", ".b", ".u"]
         }
       ]
     ]
