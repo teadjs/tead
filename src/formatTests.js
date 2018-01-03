@@ -55,7 +55,7 @@ const countFailingTests = testSuites =>
     0
   );
 
-const formatTests = testSuites => {
+const formatTests = (testSuites = []) => {
   const failingSuites = testSuites.filter(({ tests = [] }) =>
     tests.some(({ failure }) => failure)
   );
@@ -88,7 +88,7 @@ const formatTests = testSuites => {
       ];
     }, []),
     failingSuites.reduce(
-      (others, { folder, file, tests = [] }) => [
+      (others, { folder, file, tests }) => [
         ...others,
         [
           "\x1b[30;41m%s\x1b[0m \x1b[1;2m%s\x1b[0;37;1m%s\x1b[0m",
