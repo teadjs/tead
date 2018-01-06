@@ -10,6 +10,8 @@ module.exports = () =>
         null,
         true,
         1,
+        0.1 + 0.2,
+        10000000000000.1 + 0.2,
         "foo",
         {
           a: {
@@ -30,6 +32,8 @@ module.exports = () =>
         null,
         true,
         1,
+        0.3,
+        10000000000000.3,
         "foo",
         {
           a: {

@@ -100,6 +100,11 @@ export default {
       },
       numbers: {
         "is empty when equal": [diff(1, 1), []],
+        "is empty with equivalent small numbers": [diff(0.1 + 0.2, 0.3), []],
+        "is empty with equivalent large numbers": [
+          diff(10000000000000.1 + 0.2, 10000000000000.3),
+          []
+        ],
         "contains modified diff when compared to undefined": [
           diff(1, undefined),
           [{ before: 1, after: undefined, context: [] }]

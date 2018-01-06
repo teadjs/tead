@@ -49,8 +49,19 @@ const diffObjects = (before, after, context) => {
   ];
 };
 
+const moveDecimalForCompare = value =>
+  value / Math.pow(10, Math.ceil(Math.log10(value)));
+
 const diff = (before, after, context = []) => {
   if (after === before) {
+    return [];
+  }
+  if (
+    typeof before === "number" &&
+    typeof after === "number" &&
+    Math.abs(moveDecimalForCompare(before) - moveDecimalForCompare(after)) <
+      Number.EPSILON
+  ) {
     return [];
   }
   if (Array.isArray(before) && Array.isArray(after)) {
