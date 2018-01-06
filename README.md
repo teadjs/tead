@@ -1,6 +1,6 @@
 # Tead - Lighting the way to simpler testing
 
-[![Travis Build Status](https://travis-ci.org/teadjs/tead.svg?branch=master)](https://travis-ci.org/teadjs/tead) [![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/okwolf/tead?svg=true)](https://ci.appveyor.com/project/okwolf/tead/branch/master) [![Coverage Status](https://coveralls.io/repos/github/teadjs/tead/badge.svg?branch=master)](https://coveralls.io/github/teadjs/tead?branch=master) [![npm version](https://img.shields.io/npm/v/tead.svg?style=flat)](https://www.npmjs.com/package/tead)
+[![Travis Build Status](https://travis-ci.org/teadjs/tead.svg?branch=master)](https://travis-ci.org/teadjs/tead) [![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/teadjs/tead?svg=true)](https://ci.appveyor.com/project/okwolf/tead/branch/master) [![Coverage Status](https://coveralls.io/repos/github/teadjs/tead/badge.svg?branch=master)](https://coveralls.io/github/teadjs/tead?branch=master) [![npm version](https://img.shields.io/npm/v/tead.svg?style=flat)](https://www.npmjs.com/package/tead)
 
 In a world full of complex test-runners, Tead dares to keep it simple. Tests are defined as plain JavaScript objects. The only test assertion supported is a basic form of deep equals. Mocks/fakes/spies will never be provided. Asynchronous tests are not possible. These are all very intentional key features.
 
