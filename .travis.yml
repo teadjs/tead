@@ -7,8 +7,9 @@ node_js:
 before_install:
   - npm i -g npx
 
-after_script:
-  - cat coverage/lcov.info | npx coveralls
+script:
+  - npm t
+  - npx codecov
 
 notifications:
   email: false
