@@ -44,7 +44,10 @@ module.exports = options => {
       `npx nyc --require @std/esm --temp-directory coverage -r lcov -r text node ${__dirname}/tead.js --noesm "--testPattern=${testPattern}"`,
       {
         shell: true,
-        stdio: "inherit"
+        stdio: "inherit",
+        env: Object.assign({}, process.env, {
+          ESM_OPTIONS: "cjs"
+        })
       }
     );
     return;
