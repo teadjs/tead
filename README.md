@@ -51,7 +51,7 @@ $ npx tead
 4 passing
 ```
 
-**You have successfully written your first test using Tead!**
+**You have successfully written your first tests using Tead!**
 
 I believed in you all along ✋
 
@@ -97,7 +97,7 @@ Install with npm / Yarn:
 npm i -D tead
 ```
 
-Then add tead as the test script in your `package.json`:
+Then add Tead as the test script in your `package.json`:
 
 ```json
 "scripts": {
@@ -117,13 +117,13 @@ npm test
 
 Here are the available command line arguments:
 
-| Argument     | Usage                                                                                                                                                                                                     | Default                                                 |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
-| testPattern  | The regex pattern Tead uses to detect test files. Defaults to files ending with `test.js` or `spec.js` not in `node_modules`.                                                                             | <code>^((?!node_modules).)*(test&#124;spec)\.js$</code> |
-| watch        | Watch files for changes and rerun tests. Output is limited to only failing tests and overall passing/failing counts.                                                                                      |                                                         |
-| watchPattern | The regex pattern Tead uses when in watch mode to match which file changes should rereun tests. Defaults to files ending with `.js` not in `node_modules`.                                                | <code>^((?!node_modules).)*\.js$</code>                 |
-| coverage     | Test coverage information is collected, reported in the output, and written to the `/coverage` folder. This argument makes use of `npx`, so the same [caveat](#npx) about Node.js versions above applies. |                                                         |
-| noesm        | Bypass [`@std/esm`](https://github.com/standard-things/esm#stdesm), either because you aren't using ES6 modules or have already brought in your own solution.                                             |                                                         |
+| Argument     | Usage                                                                                                                                                                                                                                                 | Default                                                 |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
+| testPattern  | The regex pattern Tead uses to detect test files. Defaults to files ending with `test.js` or `spec.js` not in `node_modules`.                                                                                                                         | <code>^((?!node_modules).)*(test&#124;spec)\.js$</code> |
+| watch        | Watch files for changes and rerun tests. Output is limited to only failing tests and overall passing/failing counts.                                                                                                                                  |                                                         |
+| watchPattern | The regex pattern Tead uses when in watch mode to match which file changes should rereun tests. Defaults to files ending with `.js` not in `node_modules`.                                                                                            | <code>^((?!node_modules).)*\.js$</code>                 |
+| coverage     | Test coverage information is collected, reported in the output, and written to the `/coverage` folder. This argument makes use of `npx`, so the same [caveat](#npx) about Node.js versions above applies. Requires a [local install](#local) of Tead. |                                                         |
+| noesm        | Bypass [`@std/esm`](https://github.com/standard-things/esm#stdesm), either because you aren't using ES6 modules or have already brought in your own solution.                                                                                         |                                                         |
 
 Each argument is passed in the form `--argument=value`. Here is an example:
 
