@@ -50,7 +50,9 @@ const diffObjects = (before, after, context) => {
 };
 
 const moveDecimalForCompare = value =>
-  value / Math.pow(10, Math.ceil(Math.log10(value)));
+  value < Number.EPSILON
+    ? value
+    : value / Math.pow(10, Math.ceil(Math.log10(value)));
 
 const diff = (before, after, context = []) => {
   if (after === before) {

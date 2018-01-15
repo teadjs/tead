@@ -100,9 +100,13 @@ export default {
       },
       numbers: {
         "is empty when equal": [diff(1, 1), []],
+        "is empty with rounding error differences": [
+          diff(Math.sin(Math.PI), 0),
+          []
+        ],
         "is empty with equivalent small numbers": [diff(0.1 + 0.2, 0.3), []],
         "is empty with equivalent large numbers": [
-          diff(10000000000000.1 + 0.2, 10000000000000.3),
+          diff(Math.pow(10, 13) + 0.1 + 0.2, Math.pow(10, 13) + 0.3),
           []
         ],
         "contains modified diff when compared to undefined": [
@@ -117,9 +121,24 @@ export default {
           diff(1, false),
           [{ before: 1, after: false, context: [] }]
         ],
-        "contains modified diff when compared to numbers": [
-          diff(1, 2),
-          [{ before: 1, after: 2, context: [] }]
+        "contains modified diff when comparing small numbers": [
+          // epsilon is the smallest number we can compare
+          // so compare that with itself times two
+          diff(Number.EPSILON, Number.EPSILON * 2),
+          [{ before: Number.EPSILON, after: Number.EPSILON * 2, context: [] }]
+        ],
+        "contains modified diff when comparing large numbers": [
+          // we can compare up to fifteen significant figures
+          // so use thirteen for the whole number
+          // and two for the decimal part
+          diff(Math.pow(10, 13) + 0.01, Math.pow(10, 13) + 0.02),
+          [
+            {
+              before: Math.pow(10, 13) + 0.01,
+              after: Math.pow(10, 13) + 0.02,
+              context: []
+            }
+          ]
         ],
         "contains modified diff when compared to strings": [
           diff(1, "foobar"),
