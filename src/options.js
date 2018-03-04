@@ -4,6 +4,6 @@ module.exports = () =>
     .map(opt => opt.substring(2).split("="))
     .reduce(
       (otherOpts, [key, value]) =>
-        Object.assign(otherOpts, { [key]: value === undefined ? true : value }),
+        Object.assign(otherOpts, { [key]: !value ? true : value }),
       {}
     );
