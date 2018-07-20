@@ -22,7 +22,11 @@ const executeTests = ({ testFilter }) =>
               process.cwd().length + 1,
               fullPath.length - file.length
             ),
-            tests: compose(require, runTests, flattenTests)(fullPath)
+            tests: compose(
+              require,
+              runTests,
+              flattenTests
+            )(fullPath)
           };
         })
       )
