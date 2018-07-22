@@ -22,7 +22,8 @@
     "pretest": "node test/bootstrap",
     "test": "node src/tead.js --coverage",
     "test:watch": "node src/tead.js --watch",
-    "prepare": "npm run format:check && npm t"
+    "prepare": "npm run format:check && npm t",
+    "release": "./pre-flight-tests && npm run clean && npm i && git tag $npm_package_version && git push && git push --tags && npm publish"
   },
   "repository": {
     "type": "git",
