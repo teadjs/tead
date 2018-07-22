@@ -123,7 +123,6 @@ Here are the available command line arguments:
 | watch        | Watch files for changes and rerun tests. Output is limited to only failing tests and overall passing/failing counts.                                                                                                                                  |                                                         |
 | watchPattern | The regex pattern Tead uses when in watch mode to match which file changes should rereun tests. Defaults to files ending with `.js` not in `node_modules`.                                                                                            | <code>^((?!node_modules).)*\.js$</code>                 |
 | coverage     | Test coverage information is collected, reported in the output, and written to the `/coverage` folder. This argument makes use of `npx`, so the same [caveat](#npx) about Node.js versions above applies. Requires a [local install](#local) of Tead. |                                                         |
-| noesm        | Bypass [`@std/esm`](https://github.com/standard-things/esm#stdesm), either because you aren't using ES6 modules or have already brought in your own solution.                                                                                         |                                                         |
 
 Each argument is passed in the form `--argument=value`. Here is an example:
 
