@@ -13,7 +13,7 @@
     "node": ">=6.0"
   },
   "dependencies": {
-    "@std/esm": "^0.26.0"
+    "@std/esm": "=0.26.0"
   },
   "scripts": {
     "clean": "npx rimraf coverage node_modules",
