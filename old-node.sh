@@ -1,3 +1,3 @@
 #!/bin/bash
-docker build -t toe .
-docker run --rm -ti toe "$@"
+docker build -t tead .
+docker run --rm -ti tead "$@"
