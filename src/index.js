@@ -45,13 +45,10 @@ module.exports = options => {
   } = options;
   if (coverage) {
     spawn(
-      `npx nyc --require @std/esm --temp-directory coverage -r lcov -r text node ${__dirname}/tead.js --noesm "--testPattern=${testPattern}"`,
+      `npx nyc --require esm --temp-directory coverage -r lcov -r text node ${__dirname}/tead.js "--testPattern=${testPattern}"`,
       {
         shell: true,
-        stdio: "inherit",
-        env: Object.assign({}, process.env, {
-          ESM_OPTIONS: "cjs"
-        })
+        stdio: "inherit"
       }
     );
     return;
