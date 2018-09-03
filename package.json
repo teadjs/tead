@@ -1,9 +1,10 @@
 {
   "name": "tead",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Lighting the way to simpler testing",
   "files": [
-    "src"
+    "src",
+    "esm"
   ],
   "main": "./src/index.js",
   "bin": {
@@ -12,14 +13,14 @@
   "engines": {
     "node": ">=6.0"
   },
-  "dependencies": {
+  "devDependencies": {
     "esm": "=3.0.72"
   },
   "scripts": {
-    "clean": "npx rimraf coverage node_modules",
+    "clean": "npx rimraf node_modules esm coverage",
     "format": "npx prettier --write {src,test}/**/*.js",
     "format:check": "npx prettier --list-different {src,test}/**/*.js",
-    "pretest": "node test/bootstrap",
+    "pretest": "npx rimraf esm && npx cp -r node_modules/esm . && node test/bootstrap",
     "test": "node src/tead.js --coverage",
     "test:watch": "node src/tead.js --watch",
     "prepare": "npm run format:check && npm t",
