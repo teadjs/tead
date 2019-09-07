@@ -14,12 +14,13 @@
     "node": ">=6.0"
   },
   "devDependencies": {
-    "esm": "=3.0.72"
+    "esm": "=3.2.25",
+    "prettier": "=1.14.3"
   },
   "scripts": {
     "clean": "npx rimraf node_modules esm coverage",
-    "format": "npx prettier --write {src,test}/**/*.js",
-    "format:check": "npx prettier --list-different {src,test}/**/*.js",
+    "format": "prettier --write {src,test}/**/*.js",
+    "format:check": "prettier --list-different {src,test}/**/*.js",
     "pretest": "npx rimraf esm && npx cp -r node_modules/esm . && node test/bootstrap",
     "test": "node src/tead.js --coverage",
     "test:watch": "node src/tead.js --watch",
