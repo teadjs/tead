@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const { execSync } = require("child_process");
+const { version } = require("./package");
 const exec = command => execSync(command, { encoding: "utf8" }).trim();
 
 const exitWithError = error => {
@@ -16,4 +17,9 @@ if (gitBranchName !== "master") {
 const workingCopyChanges = exec("git status --porcelain");
 if (workingCopyChanges) {
   exitWithError("please commit your changes before making a release!");
+}
+
+const tagExists = exec(`git tag -l "${version}"`);
+if (tagExists) {
+  exitWithError(`${version} has already been released!`);
 }
