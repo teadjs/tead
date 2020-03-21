@@ -21,7 +21,7 @@
     "clean": "npx rimraf node_modules esm coverage",
     "format": "prettier --write {src,test}/**/*.js",
     "format:check": "prettier --list-different {src,test}/**/*.js",
-    "pretest": "npx rimraf esm && npx cp -r node_modules/esm . && node test/bootstrap",
+    "pretest": "npx rimraf esm && npx copyfiles --up 1 node_modules/esm/** . && node test/bootstrap",
     "test": "node src/tead.js --coverage",
     "test:watch": "node src/tead.js --watch",
     "prepare": "npm run format:check && npm t",
