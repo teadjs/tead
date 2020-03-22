@@ -13,19 +13,25 @@
   "engines": {
     "node": ">=6.0"
   },
+  "dependencies": {
+    "esm": "=3.2.25"
+  },
   "devDependencies": {
-    "esm": "=3.2.25",
-    "prettier": "=1.14.3"
+    "prettier": "=2.0.1"
   },
   "scripts": {
-    "clean": "npx rimraf node_modules esm coverage",
+    "clean": "npx rimraf node_modules coverage",
     "format": "prettier --write {src,test}/**/*.js",
     "format:check": "prettier --list-different {src,test}/**/*.js",
-    "pretest": "npx rimraf esm && npx copyfiles --up 1 node_modules/esm/** . && node test/bootstrap",
+    "pretest": "node test/bootstrap",
     "test": "node src/tead.js --coverage",
     "test:watch": "node src/tead.js --watch",
-    "prepare": "npm run format:check && npm t",
+    "prepare": "npm run format:check",
     "release": "./pre-flight-tests && npm run clean && npm i && git tag $npm_package_version && git push && git push --tags && npm publish"
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "arrowParens": "avoid"
   },
   "repository": {
     "type": "git",

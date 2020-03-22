@@ -16,13 +16,12 @@ const getFiles = (folderPath, fileFilter = () => true) =>
     ).then(allStats =>
       allStats.reduce(
         (others, [fullPath, stats]) =>
-          others.then(
-            filePaths =>
-              stats.isDirectory()
-                ? getFiles(fullPath).then(childPaths =>
-                    filePaths.concat(childPaths.filter(fileFilter))
-                  )
-                : filePaths.concat(fileFilter(fullPath) ? fullPath : [])
+          others.then(filePaths =>
+            stats.isDirectory()
+              ? getFiles(fullPath).then(childPaths =>
+                  filePaths.concat(childPaths.filter(fileFilter))
+                )
+              : filePaths.concat(fileFilter(fullPath) ? fullPath : [])
           ),
         Promise.resolve([])
       )
