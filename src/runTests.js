@@ -9,13 +9,13 @@ const runTests = test =>
   Array.isArray(test)
     ? resultsForTest(test)
     : Object(test) === test
-      ? Object.keys(test).reduce(
-          (tests, key) =>
-            Object.assign({}, tests, {
-              [key]: runTests(test[key])
-            }),
-          {}
-        )
-      : { "invalid test": [false, [{ invalid: test }]] };
+    ? Object.keys(test).reduce(
+        (tests, key) =>
+          Object.assign({}, tests, {
+            [key]: runTests(test[key])
+          }),
+        {}
+      )
+    : { "invalid test": [false, [{ invalid: test }]] };
 
 module.exports = runTests;

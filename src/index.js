@@ -22,11 +22,7 @@ const executeTests = ({ testFilter }) =>
               process.cwd().length + 1,
               fullPath.length - file.length
             ),
-            tests: compose(
-              require,
-              runTests,
-              flattenTests
-            )(fullPath)
+            tests: compose(require, runTests, flattenTests)(fullPath)
           };
         })
       )
@@ -45,7 +41,7 @@ module.exports = options => {
   } = options;
   if (coverage) {
     spawn(
-      `npx nyc --require ${__dirname}/../esm/esm.js --temp-directory coverage -r lcov -r text node ${__dirname}/tead.js "--testPattern=${testPattern}"`,
+      `npx nyc --require esm --temp-directory coverage -r lcov -r text node ${__dirname}/tead.js "--testPattern=${testPattern}"`,
       {
         shell: true,
         stdio: "inherit"
