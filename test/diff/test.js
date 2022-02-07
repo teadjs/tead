@@ -1,4 +1,4 @@
-import diff from "../../src/diff";
+import diff from "../../src/diff.js";
 
 export default {
   diff: {

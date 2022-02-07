@@ -1,4 +1,4 @@
-module.exports = () =>
+export default () =>
   process.argv
     .filter(opt => opt.startsWith("--"))
     .map(opt => opt.substring(2).split("="))

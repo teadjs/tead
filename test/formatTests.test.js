@@ -1,4 +1,4 @@
-import formatTests from "../src/formatTests";
+import formatTests from "../src/formatTests.js";
 
 export default {
   formatTests: {

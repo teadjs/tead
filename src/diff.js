@@ -75,4 +75,4 @@ const diff = (before, after, context = []) => {
   return [{ before, after, context }];
 };
 
-module.exports = diff;
+export default diff;

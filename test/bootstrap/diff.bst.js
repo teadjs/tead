@@ -1,7 +1,7 @@
-const assert = require("assert");
-const diff = require("../../src/diff");
+import assert from "assert";
+import diff from "../../src/diff.js";
 
-module.exports = () =>
+export default () =>
   [
     // Compares equal compound array/object/array values
     [

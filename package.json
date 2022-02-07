@@ -1,33 +1,31 @@
 {
   "name": "tead",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "description": "Lighting the way to simpler testing",
   "files": [
-    "src",
-    "esm"
+    "src"
   ],
+  "type": "module",
   "main": "./src/index.js",
   "bin": {
     "tead": "./src/tead.js"
   },
   "engines": {
-    "node": ">=6.0"
-  },
-  "dependencies": {
-    "esm": "=3.2.25"
+    "node": ">=12.0"
   },
   "devDependencies": {
-    "prettier": "=2.0.1"
+    "prettier": "=2.5.1"
   },
   "scripts": {
-    "clean": "npx rimraf node_modules coverage",
-    "format": "prettier --write {src,test}/**/*.js",
-    "format:check": "prettier --list-different {src,test}/**/*.js",
+    "clean": "npx --ignore-existing --quiet rimraf coverage node_modules",
+    "format": "prettier --write \"{src,test}/**/*.js\"",
+    "format:check": "prettier --list-different \"{src,test}/**/*.js\"",
     "pretest": "node test/bootstrap",
     "test": "node src/tead.js --coverage",
     "test:watch": "node src/tead.js --watch",
-    "prepare": "npm run format:check",
-    "release": "./pre-flight-tests && npm run clean && npm i && git tag $npm_package_version && git push && git push --tags && npm publish"
+    "check": "npm run format:check && npm t",
+    "release:dry": "npm run clean && npm i && npm run check",
+    "release": "node --experimental-json-modules release"
   },
   "prettier": {
     "trailingComma": "none",

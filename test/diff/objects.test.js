@@ -1,4 +1,4 @@
-import diff from "../../src/diff";
+import diff from "../../src/diff.js";
 
 export default {
   "diff with arrays": {
@@ -40,14 +40,10 @@ export default {
           diff({ a: 1 }, { a: 2 }),
           [{ before: 1, after: 2, context: ["a"] }]
         ],
-        "contains added diff when comparing empty object to single property object": [
-          diff({}, { a: 1 }),
-          [{ added: 1, context: ["a"] }]
-        ],
-        "contains removed diff when comparing single property object to empty object": [
-          diff({ a: 1 }, {}),
-          [{ removed: 1, context: ["a"] }]
-        ]
+        "contains added diff when comparing empty object to single property object":
+          [diff({}, { a: 1 }), [{ added: 1, context: ["a"] }]],
+        "contains removed diff when comparing single property object to empty object":
+          [diff({ a: 1 }, {}), [{ removed: 1, context: ["a"] }]]
       },
       objects: {
         "is empty for nested empty objects": [diff({ a: {} }, { a: {} }), []],
@@ -66,18 +62,21 @@ export default {
           diff({ a: [true] }, { a: [false] }),
           [{ before: true, after: false, context: ["a", "[0]"] }]
         ],
-        "contains modified diff when comparing nested empty array to empty empty object": [
-          diff({ a: [] }, { a: {} }),
-          [{ before: [], after: {}, context: ["a"] }]
-        ],
-        "contains added diff when comparing nested empty array to single element array": [
-          diff({ a: [] }, { a: [true] }),
-          [{ added: true, context: ["a", "[0]"] }]
-        ],
-        "contains removed diff when comparing nested single element array to empty array": [
-          diff({ a: [true] }, { a: [] }),
-          [{ removed: true, context: ["a", "[0]"] }]
-        ],
+        "contains modified diff when comparing nested empty array to empty empty object":
+          [
+            diff({ a: [] }, { a: {} }),
+            [{ before: [], after: {}, context: ["a"] }]
+          ],
+        "contains added diff when comparing nested empty array to single element array":
+          [
+            diff({ a: [] }, { a: [true] }),
+            [{ added: true, context: ["a", "[0]"] }]
+          ],
+        "contains removed diff when comparing nested single element array to empty array":
+          [
+            diff({ a: [true] }, { a: [] }),
+            [{ removed: true, context: ["a", "[0]"] }]
+          ],
         "containing objects": {
           "is empty for nested empty objects": [
             diff({ a: [{}] }, { a: [{}] }),
@@ -87,22 +86,26 @@ export default {
             diff({ a: [{ b: true }] }, { a: [{ b: true }] }),
             []
           ],
-          "contains modified diff for nested single property not equal objects": [
-            diff({ a: [{ b: 1 }] }, { a: [{ b: 2 }] }),
-            [{ before: 1, after: 2, context: ["a", "[0]", ".b"] }]
-          ],
-          "contains modified diff when comparing nested empty object to empty array": [
-            diff({ a: [{}] }, { a: [[]] }),
-            [{ before: {}, after: [], context: ["a", "[0]"] }]
-          ],
-          "contains added diff when comparing nested empty object to single property object": [
-            diff({ a: [{}] }, { a: [{ b: 1 }] }),
-            [{ added: 1, context: ["a", "[0]", ".b"] }]
-          ],
-          "contains removed diff when comparing nested single property object to empty object": [
-            diff({ a: [{ b: 1 }] }, { a: [{}] }),
-            [{ removed: 1, context: ["a", "[0]", ".b"] }]
-          ]
+          "contains modified diff for nested single property not equal objects":
+            [
+              diff({ a: [{ b: 1 }] }, { a: [{ b: 2 }] }),
+              [{ before: 1, after: 2, context: ["a", "[0]", ".b"] }]
+            ],
+          "contains modified diff when comparing nested empty object to empty array":
+            [
+              diff({ a: [{}] }, { a: [[]] }),
+              [{ before: {}, after: [], context: ["a", "[0]"] }]
+            ],
+          "contains added diff when comparing nested empty object to single property object":
+            [
+              diff({ a: [{}] }, { a: [{ b: 1 }] }),
+              [{ added: 1, context: ["a", "[0]", ".b"] }]
+            ],
+          "contains removed diff when comparing nested single property object to empty object":
+            [
+              diff({ a: [{ b: 1 }] }, { a: [{}] }),
+              [{ removed: 1, context: ["a", "[0]", ".b"] }]
+            ]
         }
       }
     }

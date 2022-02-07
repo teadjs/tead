@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-const options = require("./options")();
-require = require("esm")(module);
-
-require("./")(options);
+import getOptions from "./getOptions.js";
+import index from "./index.js";
+index(getOptions());

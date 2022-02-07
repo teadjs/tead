@@ -1,6 +1,6 @@
-const path = require("path");
-const assert = require("assert");
-const getFiles = require("../../src/getFiles");
+import path from "path";
+import assert from "assert";
+import getFiles from "../../src/getFiles.js";
 
 const json = value => JSON.stringify(value);
 const expectFiles = ([folder, filter, originalExpected]) => {
@@ -107,7 +107,7 @@ const tests = [
   ]
 ];
 
-module.exports = () =>
+export default () =>
   Promise.all(tests.map(expectFiles).concat(missingFiles)).then(results => {
     const failures = results.filter(result => result.length);
     if (failures.length) {
