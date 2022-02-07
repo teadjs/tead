@@ -125,4 +125,4 @@ const formatTests = (testSuites = []) => {
   ];
 };
 
-module.exports = formatTests;
+export default formatTests;

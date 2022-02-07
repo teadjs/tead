@@ -1,4 +1,4 @@
-import flattenTests from "../src/flattenTests";
+import flattenTests from "../src/flattenTests.js";
 
 export default {
   flattenTests: {

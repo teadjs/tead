@@ -1,4 +1,4 @@
-const diff = require("./diff");
+import diff from "./diff.js";
 
 const resultsForTest = ([actual, expected]) => {
   const resultsDiff = diff(expected, actual);
@@ -18,4 +18,4 @@ const runTests = test =>
       )
     : { "invalid test": [false, [{ invalid: test }]] };
 
-module.exports = runTests;
+export default runTests;

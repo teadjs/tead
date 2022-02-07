@@ -1,4 +1,4 @@
-import runTests from "../src/runTests";
+import runTests from "../src/runTests.js";
 
 export default {
   runTests: {

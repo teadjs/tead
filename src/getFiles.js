@@ -1,9 +1,13 @@
-const path = require("path");
-const fs = require("fs");
-const promisify = fn => (...args) =>
-  new Promise((resolve, reject) =>
-    fn(...args, (err, ...results) => (err ? reject(err) : resolve(...results)))
-  );
+import path from "path";
+import fs from "fs";
+const promisify =
+  fn =>
+  (...args) =>
+    new Promise((resolve, reject) =>
+      fn(...args, (err, ...results) =>
+        err ? reject(err) : resolve(...results)
+      )
+    );
 const readdir = promisify(fs.readdir);
 const stat = promisify(fs.stat);
 
@@ -28,4 +32,4 @@ const getFiles = (folderPath, fileFilter = () => true) =>
     )
   );
 
-module.exports = getFiles;
+export default getFiles;

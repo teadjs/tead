@@ -16,4 +16,4 @@ const flattenTests = (test = {}, prefixes = []) =>
     []
   );
 
-module.exports = flattenTests;
+export default flattenTests;

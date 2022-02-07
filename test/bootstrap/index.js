@@ -1,3 +1,3 @@
-require("./options.bst")();
-require("./diff.bst")();
-require("./getFiles.bst")();
+import("./options.bst.js");
+import("./diff.bst.js");
+import("./getFiles.bst.js");

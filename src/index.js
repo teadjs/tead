@@ -1,38 +1,41 @@
-const path = require("path");
-const fs = require("fs");
-const getFiles = require("./getFiles");
-const runTests = require("./runTests");
-const flattenTests = require("./flattenTests");
-const formatTests = require("./formatTests");
-const readline = require("readline");
-const { spawn } = require("child_process");
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
+import readline from "readline";
+import { spawn } from "child_process";
+import getFiles from "./getFiles.js";
+import runTests from "./runTests.js";
+import flattenTests from "./flattenTests.js";
+import formatTests from "./formatTests.js";
 
-const compose = (...fns) =>
-  fns.reduceRight((f, g) => (...args) => f(g(...args)));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const executeTests = ({ testFilter }) =>
   getFiles(process.cwd(), testFilter)
     .then(testFiles =>
-      formatTests(
+      Promise.all(
         testFiles.map(fullPath => {
           const file = path.basename(fullPath);
-          return {
-            file,
-            folder: fullPath.substring(
-              process.cwd().length + 1,
-              fullPath.length - file.length
-            ),
-            tests: compose(require, runTests, flattenTests)(fullPath)
-          };
+          return import(`file://${fullPath}`).then(({ default: tests }) => {
+            return {
+              file,
+              folder: fullPath.substring(
+                process.cwd().length + 1,
+                fullPath.length - file.length
+              ),
+              tests: flattenTests(runTests(tests))
+            };
+          });
         })
-      )
+      ).then(formatTests)
     )
     .catch(error => {
       console.log(error);
       return [[], [[error]], []];
     });
 
-module.exports = options => {
+export default options => {
   const {
     testPattern = "^((?!node_modules).)*(test|spec)\\.js$",
     watchPattern = "^((?!node_modules).)*\\.js$",
@@ -41,7 +44,7 @@ module.exports = options => {
   } = options;
   if (coverage) {
     spawn(
-      `npx nyc --require esm --temp-directory coverage -r lcov -r text node ${__dirname}/tead.js "--testPattern=${testPattern}"`,
+      `npx c8 --reporter=text --reporter=lcov node ${__dirname}/tead.js "--testPattern=${testPattern}"`,
       {
         shell: true,
         stdio: "inherit"
