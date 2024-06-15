@@ -21,6 +21,7 @@ const executeTests = ({ testFilter }) =>
       Promise.all(
         testFiles.map(fullPath => {
           const file = path.basename(fullPath);
+          // TODO: this approach only handles modifications to test code
           return import(`file://${fullPath}?v=${runCount++}`).then(
             ({ default: tests }) => {
               return {

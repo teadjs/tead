@@ -8,7 +8,7 @@ In a world full of complex test-runners, Tead dares to keep it simple. Tests are
 
 The boilerplate and global nastiness of functions such as `describe/beforeEach/beforeAll/afterEach/afterAll/test/it/assert/expect/...` are gone. Your linter is so happy, it no longer cares whether you use semicolons or not. Callback functions with `done` arguments that you're responsible for calling - history. Once you learn the simple convention for test values, you will notice they are all signal and no noise. Standard-issue watch mode is built-in. Support for your ES6 modules comes attached to its frontal lobe.
 
-Tead is compatible with `Node.js >= 12`.
+Tead is compatible with `Node.js >= 18`.
 
 If you are interested in using a functional style of building applications from pure functions free of side effects, Tead will aid you in your noble quest. There is only one possible kind of function that can be written in this utopian world, and but a single way to test it. Each test merely calls one of these pure functions with an input value and compares the actual result with the expected output for equality. Writing tests changes from being a chore to a joy, and suddenly tests are written first instead of as an afterthought. Such coverage. So much rejoicing.
 

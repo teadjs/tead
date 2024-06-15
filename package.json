@@ -14,18 +14,18 @@
     "node": ">=18.0"
   },
   "devDependencies": {
-    "prettier": "=2.5.1"
+    "prettier": "=3.3.2"
   },
   "scripts": {
-    "clean": "npx --yes --ignore-existing --quiet rimraf coverage node_modules",
-    "format": "prettier --write \"{src,test}/**/*.js\"",
-    "format:check": "prettier --list-different \"{src,test}/**/*.js\"",
+    "clean": "npx --yes --quiet rimraf coverage node_modules",
+    "format": "prettier --write \"**/*.js\"",
+    "format:check": "prettier --list-different \"**/*.js\"",
     "pretest": "node test/bootstrap",
     "test": "node src/tead.js --coverage",
     "test:watch": "node src/tead.js --watch",
     "check": "npm run format:check && npm t",
     "release:dry": "npm run clean && npm i && npm run check",
-    "release": "node --experimental-json-modules release"
+    "release": "node release"
   },
   "prettier": {
     "trailingComma": "none",
