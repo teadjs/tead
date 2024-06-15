@@ -11,13 +11,13 @@
     "tead": "./src/tead.js"
   },
   "engines": {
-    "node": ">=12.0"
+    "node": ">=18.0"
   },
   "devDependencies": {
     "prettier": "=2.5.1"
   },
   "scripts": {
-    "clean": "npx --ignore-existing --quiet rimraf coverage node_modules",
+    "clean": "npx --yes --ignore-existing --quiet rimraf coverage node_modules",
     "format": "prettier --write \"{src,test}/**/*.js\"",
     "format:check": "prettier --list-different \"{src,test}/**/*.js\"",
     "pretest": "node test/bootstrap",

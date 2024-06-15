@@ -11,22 +11,28 @@ import formatTests from "./formatTests.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// appending a unique id to imports is the most reliable way
+// to make sure the latest test code is used each time
+let runCount = 1;
+
 const executeTests = ({ testFilter }) =>
   getFiles(process.cwd(), testFilter)
     .then(testFiles =>
       Promise.all(
         testFiles.map(fullPath => {
           const file = path.basename(fullPath);
-          return import(`file://${fullPath}`).then(({ default: tests }) => {
-            return {
-              file,
-              folder: fullPath.substring(
-                process.cwd().length + 1,
-                fullPath.length - file.length
-              ),
-              tests: flattenTests(runTests(tests))
-            };
-          });
+          return import(`file://${fullPath}?v=${runCount++}`).then(
+            ({ default: tests }) => {
+              return {
+                file,
+                folder: fullPath.substring(
+                  process.cwd().length + 1,
+                  fullPath.length - file.length
+                ),
+                tests: flattenTests(runTests(tests))
+              };
+            }
+          );
         })
       ).then(formatTests)
     )
@@ -44,7 +50,7 @@ export default options => {
   } = options;
   if (coverage) {
     spawn(
-      `npx c8 --reporter=text --reporter=lcov node ${__dirname}/tead.js "--testPattern=${testPattern}"`,
+      `npx --yes c8 --reporter=text --reporter=lcov node ${__dirname}/tead.js "--testPattern=${testPattern}"`,
       {
         shell: true,
         stdio: "inherit"
@@ -63,7 +69,6 @@ export default options => {
         const rerunTests = () => {
           const intervalId = setInterval(() => process.stdout.write("."), 100);
           setTimeout(() => clearInterval(intervalId), 5000);
-          Object.keys(require.cache).forEach(key => delete require.cache[key]);
           executeTests(options).then(
             ([_, nextFailingTests, nextTestCounts]) => {
               clearInterval(intervalId);

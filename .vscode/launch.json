@@ -11,6 +11,15 @@
       "program": "${workspaceFolder}/src/tead.js",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Test Watch",
+      "program": "${workspaceFolder}/src/tead.js",
+      "args": ["--watch"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }
