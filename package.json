@@ -33,12 +33,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/okwolf/tead.git"
+    "url": "git+https://github.com/teadjs/tead.git"
   },
   "author": "Wolfgang Wedemeyer <wolf@okwolf.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/okwolf/tead/issues"
+    "url": "https://github.com/teadjs/tead/issues"
   },
-  "homepage": "https://github.com/okwolf/tead"
+  "homepage": "https://tead.js.org"
 }
