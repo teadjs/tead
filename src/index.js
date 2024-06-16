@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
 import readline from "readline";
-import { spawn } from "child_process";
+import { spawnSync } from "child_process";
 import getFiles from "./getFiles.js";
 import runTests from "./runTests.js";
 import flattenTests from "./flattenTests.js";
@@ -48,14 +48,14 @@ export default options => {
     coverage
   } = options;
   if (coverage) {
-    spawn(
+    const { status } = spawnSync(
       `npx --yes c8 --reporter=text --reporter=lcov node ${__dirname}/tead.js "--testPattern=${testPattern}"`,
       {
         shell: true,
         stdio: "inherit"
       }
     );
-    return;
+    process.exit(status);
   }
   const testFilter = filename => filename.match(new RegExp(testPattern));
   const watchFilter = filename => filename.match(new RegExp(watchPattern));
@@ -95,7 +95,7 @@ export default options => {
           .concat(failingTests, testCounts)
           .forEach(line => console.log(...line));
         console.log();
-        process.exit(failingTests.length);
+        process.exit(testCounts?.[1]?.[1] || 0);
       }
     }
   );
