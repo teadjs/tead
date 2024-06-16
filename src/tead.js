@@ -2,4 +2,4 @@
 
 import getOptions from "./getOptions.js";
 import index from "./index.js";
-index(getOptions());
+index(getOptions(process.argv));

@@ -11,18 +11,16 @@ import formatTests from "./formatTests.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// appending a unique id to imports is the most reliable way
-// to make sure the latest test code is used each time
-let runCount = 1;
-
 const executeTests = ({ testFilter }) =>
   getFiles(process.cwd(), testFilter)
     .then(testFiles =>
       Promise.all(
         testFiles.map(fullPath => {
           const file = path.basename(fullPath);
+          // appending a unique id to imports is the most reliable way
+          // to make sure the latest test code is used each time
           // TODO: this approach only handles modifications to test code
-          return import(`file://${fullPath}?v=${runCount++}`).then(
+          return import(`file://${fullPath}?v=${Date.now()}`).then(
             ({ default: tests }) => {
               return {
                 file,
@@ -70,15 +68,13 @@ export default options => {
         const rerunTests = () => {
           const intervalId = setInterval(() => process.stdout.write("."), 100);
           setTimeout(() => clearInterval(intervalId), 5000);
-          executeTests(options).then(
-            ([_, nextFailingTests, nextTestCounts]) => {
-              clearInterval(intervalId);
-              process.stdout.write("\u001b[2J\u001b[0;0H");
-              nextFailingTests
-                .concat(nextTestCounts)
-                .forEach(line => console.log(...line));
-            }
-          );
+          executeTests(options).then(([, nextFailingTests, nextTestCounts]) => {
+            clearInterval(intervalId);
+            process.stdout.write("\u001b[2J\u001b[0;0H");
+            nextFailingTests
+              .concat(nextTestCounts)
+              .forEach(line => console.log(...line));
+          });
         };
         readline.emitKeypressEvents(process.stdin);
         process.stdin.setRawMode(true);

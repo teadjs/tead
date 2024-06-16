@@ -1,15 +1,5 @@
 import path from "path";
-import fs from "fs";
-const promisify =
-  fn =>
-  (...args) =>
-    new Promise((resolve, reject) =>
-      fn(...args, (err, ...results) =>
-        err ? reject(err) : resolve(...results)
-      )
-    );
-const readdir = promisify(fs.readdir);
-const stat = promisify(fs.stat);
+import { readdir, stat } from "fs/promises";
 
 const getFiles = (folderPath, fileFilter = () => true) =>
   readdir(folderPath).then(names =>

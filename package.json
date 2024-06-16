@@ -14,16 +14,18 @@
     "node": ">=18.0"
   },
   "devDependencies": {
+    "eslint": "=9.5.0",
     "prettier": "=3.3.2"
   },
   "scripts": {
     "clean": "npx --yes --quiet rimraf coverage node_modules",
     "format": "prettier --write \"**/*.js\"",
     "format:check": "prettier --list-different \"**/*.js\"",
+    "lint": "eslint",
     "pretest": "node test/bootstrap",
     "test": "node src/tead.js --coverage",
     "test:watch": "node src/tead.js --watch",
-    "check": "npm run format:check && npm t",
+    "check": "npm run format:check && npm run lint && npm t",
     "release:dry": "npm run clean && npm i && npm run check",
     "release": "node release"
   },
