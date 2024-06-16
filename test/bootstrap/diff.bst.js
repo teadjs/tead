@@ -373,6 +373,7 @@ export default () =>
       const actual = diff(before, after);
       try {
         assert.deepStrictEqual(actual, expected);
+        // eslint-disable-next-line no-unused-vars
       } catch (e) {
         const json = value => JSON.stringify(value);
         return [

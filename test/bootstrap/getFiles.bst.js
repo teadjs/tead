@@ -1,6 +1,10 @@
 import path from "path";
 import assert from "assert";
+import { fileURLToPath } from "url";
 import getFiles from "../../src/getFiles.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const json = value => JSON.stringify(value);
 const expectFiles = ([folder, filter, originalExpected]) => {
@@ -21,6 +25,7 @@ const expectFiles = ([folder, filter, originalExpected]) => {
       const actual = originalActual.sort();
       try {
         assert.deepStrictEqual(actual, expected);
+        // eslint-disable-next-line no-unused-vars
       } catch (e) {
         return [
           "test failed! values:\n",
@@ -38,7 +43,6 @@ const expectFiles = ([folder, filter, originalExpected]) => {
         "test error! values:\n",
         ` folder: ${fullFolder}\n`,
         ` filter: ${filter}\n`,
-        ` expected: ${json(expected)}\n`,
         ` error: ${json(e)}\n`
       ];
     });

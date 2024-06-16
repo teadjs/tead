@@ -1,5 +1,5 @@
 import assert from "assert";
-import options from "../../src/getOptions.js";
+import getOptions from "../../src/getOptions.js";
 
 [
   [[], {}],
@@ -14,11 +14,10 @@ import options from "../../src/getOptions.js";
   ]
 ]
   .map(([argv, expected]) => {
-    const originalArgv = process.argv;
-    process.argv = argv;
-    const actual = options();
+    const actual = getOptions(argv);
     try {
       assert.deepStrictEqual(actual, expected);
+      // eslint-disable-next-line no-unused-vars
     } catch (e) {
       const json = value => JSON.stringify(value);
       return [
@@ -27,8 +26,6 @@ import options from "../../src/getOptions.js";
         ` expected: ${json(expected)}\n`,
         ` actual: ${json(actual)}\n`
       ];
-    } finally {
-      process.argv = originalArgv;
     }
     return [];
   })
