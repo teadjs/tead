@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs";
-import { fileURLToPath } from "url";
+import { fileURLToPath, pathToFileURL } from "url";
 import readline from "readline";
 import { spawnSync } from "child_process";
 import getFiles from "./getFiles.js";
@@ -19,19 +19,18 @@ const executeTests = ({ testFilter }) =>
           const file = path.basename(fullPath);
           // appending a unique id to imports is the most reliable way
           // to make sure the latest test code is used each time
-          // TODO: this approach only handles modifications to test code
-          return import(`file://${fullPath}?v=${Date.now()}`).then(
-            ({ default: tests }) => {
-              return {
-                file,
-                folder: fullPath.substring(
-                  process.cwd().length + 1,
-                  fullPath.length - file.length
-                ),
-                tests: flattenTests(runTests(tests))
-              };
-            }
-          );
+          const url = new URL(pathToFileURL(fullPath));
+          url.searchParams.set("v", Date.now());
+          return import(url.href).then(({ default: tests }) => {
+            return {
+              file,
+              folder: fullPath.substring(
+                process.cwd().length + 1,
+                fullPath.length - file.length
+              ),
+              tests: flattenTests(runTests(tests))
+            };
+          });
         })
       ).then(formatTests)
     )
@@ -42,14 +41,25 @@ const executeTests = ({ testFilter }) =>
 
 export default options => {
   const {
-    testPattern = "^((?!node_modules).)*(test|spec)\\.js$",
+    testPattern = "^((?!node_modules).)*(\\.|\\/)(test|spec)\\.js$",
     watchPattern = "^((?!node_modules).)*\\.js$",
     watch,
-    coverage
+    coverage,
+    hooked
   } = options;
   if (coverage) {
     const { status } = spawnSync(
       `npx --yes c8 --reporter=text --reporter=lcov node ${__dirname}/tead.js "--testPattern=${testPattern}"`,
+      {
+        shell: true,
+        stdio: "inherit"
+      }
+    );
+    process.exit(status);
+  }
+  if (watch && !hooked) {
+    const { status } = spawnSync(
+      `node --import 'data:text/javascript,import { register } from "node:module";import { pathToFileURL } from "node:url";register(pathToFileURL("${__dirname}/resolveImportToLatest.js"));' ${__dirname}/tead.js --watch "--testPattern=${testPattern}" "--watchPattern=${watchPattern}" --hooked`,
       {
         shell: true,
         stdio: "inherit"
