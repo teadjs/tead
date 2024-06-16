@@ -15,6 +15,15 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Debug Coverage",
+      "program": "${workspaceFolder}/src/tead.js",
+      "args": ["--coverage"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Debug Test Watch",
       "program": "${workspaceFolder}/src/tead.js",
       "args": ["--watch"],
